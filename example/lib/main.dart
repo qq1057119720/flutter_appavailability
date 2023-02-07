@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  List<Map<String, String>> installedApps;
+  late List<Map<String, String>> installedApps;
   List<Map<String, String>> iOSApps = [
     {
       "app_name": "Calendar",
@@ -59,9 +59,7 @@ class _MyAppState extends State<MyApp> {
 
     }
 
-    setState(() {
-      installedApps = _installedApps;
-    });
+
 
   }
 
@@ -79,17 +77,14 @@ class _MyAppState extends State<MyApp> {
           itemCount: installedApps == null ? 0 : installedApps.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(installedApps[index]["app_name"]),
+              title: Text(installedApps[index]["app_name"]!),
               trailing: IconButton(
                 icon: const Icon(Icons.open_in_new),
                 onPressed: () {
-                  Scaffold.of(context).hideCurrentSnackBar();
-                  AppAvailability.launchApp(installedApps[index]["package_name"]).then((_) {
+                  AppAvailability.launchApp(installedApps[index]["package_name"]!).then((_) {
                     print("App ${installedApps[index]["app_name"]} launched!");
                   }).catchError((err) {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("App ${installedApps[index]["app_name"]} not found!")
-                    ));
+
                     print(err);
                   });
                 }

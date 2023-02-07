@@ -47,7 +47,12 @@ class AppAvailability {
       };
     }
 
-    return null;
+    return {
+      "app_name": "",
+      "package_name": uri,
+      "versionCode": "",
+      "version_name": ""
+    };
   }
 
   /// Only for **Android**.
@@ -57,7 +62,7 @@ class AppAvailability {
   static Future<List<Map<String, String>>> getInstalledApps() async {
     List<dynamic> apps = await _channel.invokeMethod("getInstalledApps");
     if (apps != null && apps is List) {
-      List<Map<String, String>> list = new List();
+      List<Map<String, String>> list =[];
       for (var app in apps) {
         if (app is Map) {
           list.add({
@@ -71,7 +76,7 @@ class AppAvailability {
 
       return list;
     }
-    return new List(0);
+    return [];
   }
 
   /// Only for **Android**.
