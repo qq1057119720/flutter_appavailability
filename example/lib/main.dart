@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> getApps() async {
-    List<Map<String, String>> _installedApps;
+    List<dynamic> _installedApps;
 
     if (Platform.isAndroid) {
 
